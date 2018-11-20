@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/taskField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:hint="Task"/>
+
+    <TextView
+        android:id="@+id/errorTextTask"
+        android:visibility="gone"
+        android:layout_below="@id/taskField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Please enter a task name"
+        android:textColor="#ff0000"/>
+
+    <EditText
+        android:id="@+id/dateField"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/taskField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:hint="Date"/>
+
+    <TextView
+        android:id="@+id/errorTextDate"
+        android:visibility="gone"
+        android:layout_below="@id/dateField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Please choose a date"
+        android:textColor="#ff0000"/>
+
+    <Spinner
+        android:id="@+id/lists_spinner"
+        android:layout_below="@id/errorTextDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"></Spinner>
+
+    <RelativeLayout
+        android:id="@+id/btnLayout"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/lists_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Add Task"/>
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_toEndOf="@id/saveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Cancel"/>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
