@@ -33,9 +33,9 @@ public class HomeFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return ListsFragment.newInstance(1);
+                    return AllTasksFragment.newInstance(1);
                 default:
-                    return AllTasksFragment.newInstance(2);
+                    return ListsFragment.newInstance(2);
             }
 
         }
@@ -50,9 +50,9 @@ public class HomeFragment extends Fragment {
 
             switch (position) {
                 case 0:
-                    return "Lists";
-                default:
                     return "All Tasks";
+                default:
+                    return "Lists";
             }
 
 
