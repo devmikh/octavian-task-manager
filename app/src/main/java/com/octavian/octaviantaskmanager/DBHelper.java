@@ -138,6 +138,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 task.setId(c.getInt(c.getColumnIndex(KEY_ID)));
                 task.setTask(c.getString(c.getColumnIndex(KEY_TASK)));
                 task.setDate(c.getString(c.getColumnIndex(KEY_DATE)));
+                task.setStatus(c.getInt(c.getColumnIndex(KEY_STATUS)));
 
                 // adding to task list
                 tasks.add(task);
@@ -180,11 +181,41 @@ public class DBHelper extends SQLiteOpenHelper {
                 task.setId(c.getInt(c.getColumnIndex(KEY_ID)));
                 task.setTask(c.getString(c.getColumnIndex(KEY_TASK)));
                 task.setDate(c.getString(c.getColumnIndex(KEY_DATE)));
+                task.setStatus(c.getInt(c.getColumnIndex(KEY_STATUS)));
 
                 // adding to task list
                 tasks.add(task);
             }while (c.moveToNext());
         }
+        return tasks;
+    }
+
+    //get task with same date
+
+    public ArrayList<Task> getAllTasksByDate(String date){
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM " + TABLE_TASK + " WHERE " +
+                KEY_DATE + " = " + "'" + date + "'";
+
+        Log.e(LOG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c.moveToFirst()){
+            do {
+                Task task = new Task();
+                task.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+                task.setTask(c.getString(c.getColumnIndex(KEY_TASK)));
+                task.setDate(c.getString(c.getColumnIndex(KEY_DATE)));
+                task.setStatus(c.getInt(c.getColumnIndex(KEY_STATUS)));
+
+                // adding to task list
+                tasks.add(task);
+            }while (c.moveToNext());
+        }
+
         return tasks;
     }
 
@@ -211,10 +242,6 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_STATUS, task.getStatus());
 
-        String query1 = "SELECT * FROM " + TABLE_TASK;
-        Cursor c1 = db.rawQuery(query1, null);
-        Log.e(LOG, DatabaseUtils.dumpCursorToString(c1));
-
         return db.update(TABLE_TASK, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(task.getId())});
     }
@@ -223,6 +250,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void deleteTask(long task_id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_TASK, KEY_ID + " =?",
+                new String[] {String.valueOf(task_id)});
+        db.delete(TABLE_TASK_LIST, KEY_TASK_ID + " = ?",
                 new String[] {String.valueOf(task_id)});
     }
 
@@ -385,6 +414,19 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         if (db != null && db.isOpen())
             db.close();
+    }
+
+    public void printData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query1 = "SELECT * FROM " + TABLE_TASK;
+        String query2 = "SELECT * FROM " + TABLE_LIST;
+        String query3 = "SELECT * FROM " + TABLE_TASK_LIST;
+        Cursor c1 = db.rawQuery(query1, null);
+        Cursor c2 = db.rawQuery(query2, null);
+        Cursor c3 = db.rawQuery(query3, null);
+        Log.e(LOG, DatabaseUtils.dumpCursorToString(c1));
+        Log.e(LOG, DatabaseUtils.dumpCursorToString(c2));
+        Log.e(LOG, DatabaseUtils.dumpCursorToString(c3));
     }
 
 }

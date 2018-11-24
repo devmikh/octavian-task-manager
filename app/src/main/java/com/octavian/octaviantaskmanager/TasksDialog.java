@@ -1,71 +1,55 @@
 package com.octavian.octaviantaskmanager;
 
-import android.app.AlertDialog;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class AllTasksFragment extends Fragment {
+public class TasksDialog extends Dialog {
 
-    FloatingActionButton fab;
+    Activity activity;
     ListView listView;
     TextView emptyView;
     DBHelper dbHelper;
     TaskAdapter taskAdapter;
+    String listTitle;
+    FloatingActionButton fab;
     BroadcastReceiver mReceiver;
 
-    public static AllTasksFragment newInstance(int position) {
-        AllTasksFragment fragment = new AllTasksFragment();
-        Bundle args = new Bundle();
-        args.putInt("position", position);
-        fragment.setArguments(args);
-
-        return fragment;
+    public TasksDialog(Activity a, String listTitle) {
+        super(a);
+        this.activity = a;
+        this.listTitle = listTitle;
     }
 
-    public AllTasksFragment() {
+    protected void onCreate(Bundle savedInstanceBundle){
+        super.onCreate(savedInstanceBundle);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.fragment_tasks);
 
-    }
+        listView = findViewById(R.id.tasks_list_view);
+        emptyView = findViewById(R.id.empty);
+        fab = findViewById(R.id.fab_tasks);
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_all_tasks, container, false);
-        fab = view.findViewById(R.id.fab_alltasks);
-        listView = view.findViewById(R.id.alltasks_list_view);
-        emptyView = view.findViewById(R.id.empty);
-
-        refreshFragment();
-
+        refresh();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewTaskDialog dialog = new NewTaskDialog(getActivity());
+                NewTaskDialog dialog = new NewTaskDialog(activity, listTitle);
                 dialog.show();
             }
         });
@@ -77,11 +61,11 @@ public class AllTasksFragment extends Fragment {
                 Task task = dbHelper.getTask(taskAdapter.getItem(position).getId());
                 if (task.getStatus() == 0){
                     task.setStatus(1);
-                    Toast.makeText(getActivity(), "status changed to 1",
-                                        Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, "status changed to 1",
+                            Toast.LENGTH_LONG).show();
                 }else{
                     task.setStatus(0);
-                    Toast.makeText(getActivity(), "status changed to 0",
+                    Toast.makeText(activity, "status changed to 0",
                             Toast.LENGTH_LONG).show();
                 }
                 dbHelper.updateTaskStatus(task);
@@ -91,7 +75,7 @@ public class AllTasksFragment extends Fragment {
                 getContext().getApplicationContext().sendBroadcast(updateIntent);
 
                 dbHelper.closeDB();
-                refreshFragment();
+                refresh();
             }
         });
 
@@ -99,11 +83,8 @@ public class AllTasksFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                EditTaskDialog dialog = new EditTaskDialog(getActivity(), taskAdapter.getItem(position).getId());
+                EditTaskDialog dialog = new EditTaskDialog(activity, taskAdapter.getItem(position).getId());
                 dialog.show();
-
-
-
 
                 return true;
             }
@@ -113,23 +94,21 @@ public class AllTasksFragment extends Fragment {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if(intent.getAction().contentEquals("db.updateTasks")){
-                    refreshFragment();
+                    refresh();
                 }
             }
         };
 
         IntentFilter mDataUpdateFilter = new IntentFilter("db.updateTasks");
 
-        getActivity().getApplicationContext().registerReceiver(mReceiver, mDataUpdateFilter);
-
-        return view;
+        activity.getApplicationContext().registerReceiver(mReceiver, mDataUpdateFilter);
     }
 
-    public void refreshFragment(){
-        if (getActivity() != null){
+    public void refresh(){
+        if (activity != null){
             dbHelper = new DBHelper(getContext());
 
-            final ArrayList<Task> tasks = dbHelper.getAllTasks();
+            final ArrayList<Task> tasks = dbHelper.getAllTasksByList(listTitle);
 
             dbHelper.closeDB();
 
@@ -139,11 +118,5 @@ public class AllTasksFragment extends Fragment {
 
             listView.setEmptyView(emptyView);
         }
-
-
-
     }
-
-
-
 }

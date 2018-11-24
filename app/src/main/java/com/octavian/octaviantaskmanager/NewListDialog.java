@@ -16,7 +16,7 @@ public class NewListDialog extends Dialog {
     public Activity activity;
     EditText listField;
     Button saveBtn, cancelBtn;
-    TextView errorText;
+    TextView errorText, errorText2;
     DBHelper dbHelper;
 
     public NewListDialog(Activity a){
@@ -34,15 +34,19 @@ public class NewListDialog extends Dialog {
 
         listField = findViewById(R.id.listField);
         errorText = findViewById(R.id.errorText);
+        errorText2 = findViewById(R.id.errorText2);
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dbHelper = new DBHelper(getContext());
                 String listName = listField.getText().toString().trim();
                 if (listName.equals("")){
                     errorText.setVisibility(View.VISIBLE);
+                }else if(dbHelper.getTaskList(listName) != null) {
+                    errorText2.setVisibility(View.VISIBLE);
                 }else{
-                    dbHelper = new DBHelper(getContext());
+
                     TaskList list = new TaskList(listField.getText().toString());
                     dbHelper.createList(list);
                     dbHelper.closeDB();
@@ -69,6 +73,7 @@ public class NewListDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 errorText.setVisibility(View.GONE);
+                errorText2.setVisibility(View.GONE);
             }
         });
     }
