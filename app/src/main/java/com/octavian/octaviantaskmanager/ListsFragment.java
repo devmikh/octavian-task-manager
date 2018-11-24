@@ -1,5 +1,6 @@
 package com.octavian.octaviantaskmanager;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,9 +10,11 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -57,13 +60,18 @@ public class ListsFragment extends Fragment {
         listView = view.findViewById(R.id.lists_list_view);
         emptyView = view.findViewById(R.id.empty);
 
-        // if there is no "All Tasks" list in db, create it
+        // if there is no "Default" list in db, create it
         dbHelper = new DBHelper(getContext());
-        if (dbHelper.getTaskList("All Tasks") == null){
-            TaskList list = new TaskList("All Tasks");
+        if (dbHelper.getTaskList("Default") == null){
+            TaskList list = new TaskList("Default");
             dbHelper.createList(list);
             dbHelper.closeDB();
         }
+//        if (dbHelper.getTaskList("Default") != null){
+//            TaskList list = dbHelper.getTaskList("Default");
+//            dbHelper.deleteTaskList(list, true);
+//            dbHelper.closeDB();
+//        }
 
         refreshFragment();
 
@@ -78,36 +86,53 @@ public class ListsFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                dbHelper = new DBHelper(getContext());
 
-                ArrayList<Task> tasks = dbHelper.getAllTasksByList(taskListAdapter.getItem(position).getListTitle());
+                TasksDialog tasksDialog = new TasksDialog(getActivity(), taskListAdapter.getItem(position).getListTitle());
+                tasksDialog.show();
+                Window window = tasksDialog.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//                dbHelper = new DBHelper(getContext());
+//
+//                ArrayList<Task> tasks = dbHelper.getAllTasksByList(taskListAdapter.getItem(position).getListTitle());
 
-                String message = "";
-
-                for (Task task : tasks){
-                    message += task.getTask() + ", ";
-                }
-
-                dbHelper.closeDB();
-
+//                View child = listView.getChildAt(position);
 
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Show tasks")
-                        .setMessage(message)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+//                if (child.getVisibility() == View.VISIBLE){
+//                    child.setVisibility(View.GONE);
+//                }else{
+//                    child.setVisibility(View.VISIBLE);
+//                }
+//                getChildFragmentManager().beginTransaction().replace(child.findViewById(R.id.tasks_container).getId(),
+//                        TasksFragment.newInstance(taskListAdapter.getItem(position).getListTitle())).commit();
+//                Log.e("listView item onClick", "YES THAT WORKED" );
 
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+//                String message = "";
+//
+//                for (Task task : tasks){
+//                    message += task.getTask() + ", ";
+//                }
+//
+//
+//
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                builder.setTitle("Show tasks")
+//                        .setMessage(message)
+//                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                            }
+//                        })
+//                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//
+//                            }
+//                        })
+//                        .setIcon(android.R.drawable.ic_dialog_alert)
+//                        .show();
+//                dbHelper.printData();
+//                dbHelper.closeDB();
 
             }
         });

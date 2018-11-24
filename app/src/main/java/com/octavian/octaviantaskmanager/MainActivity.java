@@ -1,5 +1,6 @@
 package com.octavian.octaviantaskmanager;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -35,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     }
+
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             selectedFragment).commit();
+
 
                     return true;
 

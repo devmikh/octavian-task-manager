@@ -5,11 +5,39 @@
     android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants">
 
-    <TextView
-        android:id="@+id/textView_listTitle"
+    <RelativeLayout
+        android:id="@+id/list_row"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"/>
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textView_listTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+
+            android:text="list"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/task"
+            android:layout_alignTop="@id/task"
+            android:layout_alignBottom="@id/task">
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/deleteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="7dp"
+                android:layout_centerVertical="true"
+                android:drawableRight="@drawable/ic_close" />
+        </RelativeLayout>
+    </RelativeLayout>
+
 
 
 </RelativeLayout>

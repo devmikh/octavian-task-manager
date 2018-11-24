@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.view.View;
 import android.view.Window;
@@ -16,10 +17,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class NewTaskDialog extends Dialog{
+
+    SimpleDateFormat dateFormatForTask  = new SimpleDateFormat("MM/dd/yyyy");
 
     public Activity activity;
     DatePickerDialog datePicker;
@@ -29,10 +34,24 @@ public class NewTaskDialog extends Dialog{
     Spinner listsSpinner;
     DBHelper dbHelper;
     ArrayAdapter spinnerAdapter;
+    String listName = null;
+    Date date = null;
 
     public NewTaskDialog(Activity a){
         super(a);
         this.activity = a;
+    }
+
+    public NewTaskDialog(Activity a, String listTitle){
+        super(a);
+        this.activity = a;
+        this.listName = listTitle;
+    }
+
+    public NewTaskDialog(Activity a, Date date){
+        super(a);
+        this.activity = a;
+        this.date = date;
     }
 
     protected void onCreate(Bundle savedInstanceState){
@@ -47,6 +66,9 @@ public class NewTaskDialog extends Dialog{
         errorTextTask = findViewById(R.id.errorTextTask);
         errorTextDate = findViewById(R.id.errorTextDate);
         listsSpinner = findViewById(R.id.lists_spinner);
+        dateField.setFocusable(false);
+
+        taskField.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
 
         dbHelper = new DBHelper(getContext());
         ArrayList<TaskList> taskLists = dbHelper.getAllTaskLists();
@@ -59,7 +81,18 @@ public class NewTaskDialog extends Dialog{
 
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         listsSpinner.setAdapter(spinnerAdapter);
+        if (listName != null){
+            for (int i=0; i < taskListTitles.size(); i++){
+                if (taskListTitles.get(i).equals(listName)){
+                    listsSpinner.setSelection(i);
+                }
+            }
+        }
 
+        if (date != null){
+            String dateString =  dateFormatForTask.format(date);
+            dateField.setText(dateString);
+        }
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +115,7 @@ public class NewTaskDialog extends Dialog{
 
                     getContext().getApplicationContext().sendBroadcast(updateIntent);
 
-                    Toast.makeText(activity, "Task added successfully",
+                    Toast.makeText(activity, "Task added successfully with status " + task.getStatus(),
                             Toast.LENGTH_LONG).show();
                     dismiss();
                 }
@@ -109,13 +142,25 @@ public class NewTaskDialog extends Dialog{
                 errorTextDate.setVisibility(View.GONE);
                 final Calendar calendar = Calendar.getInstance();
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int month = calendar.get(Calendar.MONTH);
+                final int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
 
                 datePicker = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        dateField.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
+                        monthOfYear = monthOfYear + 1;
+                        String monthString = Integer.toString(monthOfYear);
+                        String dayString = Integer.toString(dayOfMonth);
+
+
+                        if (monthString.length() == 1){
+                            monthString = "0" + monthString;
+                        }
+                        if (dayString.length() == 1){
+                            dayString = "0" + dayString;
+                        }
+                        dateField.setText(monthString + "/" + dayString + "/" + year);
                     }
                 }, year, month, day);
                 datePicker.show();

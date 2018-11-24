@@ -6,13 +6,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AllTasksFragment">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ListView
-            android:id="@+id/alltasks_list_view"
+            android:id="@+id/tasks_list_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></ListView>
 
@@ -20,7 +19,7 @@
             android:id="@+id/empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No tasks found"
+            android:text="This list is empty"
             android:layout_marginTop="10dp"
             android:textSize="20dp"
             android:layout_centerHorizontal="true"/>
@@ -29,14 +28,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_alltasks"
+                android:id="@+id/fab_tasks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="16dp"
                 android:src="@drawable/ic_add"/>
 
         </android.support.design.widget.CoordinatorLayout>
-    
+
     </RelativeLayout>
 </FrameLayout>

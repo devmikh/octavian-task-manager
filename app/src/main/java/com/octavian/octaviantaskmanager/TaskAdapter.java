@@ -31,11 +31,11 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
     public View getView(int position, View convertView, ViewGroup parent){
         View listItem = convertView;
+        int type = getItemViewType(position);
         if(listItem == null){
-            int type = getItemViewType(position);
             listItem = getLayoutForType(type, parent);
+            Log.e("TaskAdapter", "called getItem();");
         }
-
 
         final Task currentTask = tasks.get(position);
 
@@ -54,7 +54,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         TextView date = listItem.findViewById(R.id.textView_taskDate);
         date.setText(currentTask.getDate());
 
-        Button deleteBtn = listItem.findViewById(R.id.deleteBtn);
+        TextView deleteBtn = listItem.findViewById(R.id.deleteBtn);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,14 +73,20 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             }
         });
 
-        Log.e("TaskAdapter", "called getItem();");
+
 
         return listItem;
 
     }
 
     public int getItemViewType(int position){
-        return getItem(position).getStatus();
+        if (getItem(position).getStatus() == 0){
+            return 0;
+        }
+        else{
+            return 1;
+        }
+
     }
 
     public int getViewTypeCount(){
@@ -90,10 +96,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
     public View getLayoutForType(int type, ViewGroup parent){
         if (type == 0){
             return LayoutInflater.from(mContext).inflate(R.layout.task_list_item, parent, false);
-        }else if (type == 1){
-            return LayoutInflater.from(mContext).inflate(R.layout.task_list_item_done, parent, false);
         }else{
-            return LayoutInflater.from(mContext).inflate(R.layout.task_list_item, parent, false);
+            return LayoutInflater.from(mContext).inflate(R.layout.task_list_item_done, parent, false);
         }
     }
 

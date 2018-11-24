@@ -22,11 +22,21 @@
         android:text="Please enter a list name"
         android:textColor="#ff0000"/>
 
+    <TextView
+        android:id="@+id/errorText2"
+        android:visibility="gone"
+        android:layout_below="@id/errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="List with this name already exists"
+        android:textColor="#ff0000"/>
+
     <RelativeLayout
         android:id="@+id/btnLayout"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/errorText"
+        android:layout_below="@id/errorText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button

@@ -1,17 +1,12 @@
 package com.octavian.octaviantaskmanager;
 
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,55 +15,40 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
-public class AllTasksFragment extends Fragment {
+public class CalendarTaskFragment extends Fragment {
 
-    FloatingActionButton fab;
     ListView listView;
     TextView emptyView;
     DBHelper dbHelper;
     TaskAdapter taskAdapter;
+    String date;
     BroadcastReceiver mReceiver;
 
-    public static AllTasksFragment newInstance(int position) {
-        AllTasksFragment fragment = new AllTasksFragment();
+    public static CalendarTaskFragment newInstance(String dateString){
+        CalendarTaskFragment f = new CalendarTaskFragment();
+
         Bundle args = new Bundle();
-        args.putInt("position", position);
-        fragment.setArguments(args);
 
-        return fragment;
+        args.putString("date", dateString);
+        f.setArguments(args);
+        return f;
     }
 
-    public AllTasksFragment() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View view = inflater.inflate(R.layout.fragment_calendar_task, container,false);
 
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_all_tasks, container, false);
-        fab = view.findViewById(R.id.fab_alltasks);
-        listView = view.findViewById(R.id.alltasks_list_view);
+        listView = view.findViewById(R.id.tasks_list_view);
         emptyView = view.findViewById(R.id.empty);
 
+        Bundle args = getArguments();
+        date = args.getString("date", "01/01/1970");
+
         refreshFragment();
-
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewTaskDialog dialog = new NewTaskDialog(getActivity());
-                dialog.show();
-            }
-        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,7 +58,7 @@ public class AllTasksFragment extends Fragment {
                 if (task.getStatus() == 0){
                     task.setStatus(1);
                     Toast.makeText(getActivity(), "status changed to 1",
-                                        Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_LONG).show();
                 }else{
                     task.setStatus(0);
                     Toast.makeText(getActivity(), "status changed to 0",
@@ -101,9 +81,6 @@ public class AllTasksFragment extends Fragment {
 
                 EditTaskDialog dialog = new EditTaskDialog(getActivity(), taskAdapter.getItem(position).getId());
                 dialog.show();
-
-
-
 
                 return true;
             }
@@ -129,7 +106,7 @@ public class AllTasksFragment extends Fragment {
         if (getActivity() != null){
             dbHelper = new DBHelper(getContext());
 
-            final ArrayList<Task> tasks = dbHelper.getAllTasks();
+            final ArrayList<Task> tasks = dbHelper.getAllTasksByDate(date);
 
             dbHelper.closeDB();
 
@@ -139,11 +116,5 @@ public class AllTasksFragment extends Fragment {
 
             listView.setEmptyView(emptyView);
         }
-
-
-
     }
-
-
-
 }

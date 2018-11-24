@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -60,6 +61,7 @@ public class EditTaskDialog extends Dialog{
         errorTextTask = findViewById(R.id.errorTextTask);
         errorTextDate = findViewById(R.id.errorTextDate);
         listsSpinner = findViewById(R.id.lists_spinner);
+        taskField.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
 
         dbHelper = new DBHelper(getContext());
         long selectedListId = dbHelper.getListOfATask(taskId);
@@ -141,7 +143,18 @@ public class EditTaskDialog extends Dialog{
                 datePicker = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        dateField.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        monthOfYear = monthOfYear + 1;
+                        String monthString = Integer.toString(monthOfYear);
+                        String dayString = Integer.toString(dayOfMonth);
+
+
+                        if (monthString.length() == 1){
+                            monthString = "0" + monthString;
+                        }
+                        if (dayString.length() == 1){
+                            dayString = "0" + dayString;
+                        }
+                        dateField.setText(monthString + "/" + dayString + "/" + year);
                     }
                 }, year, month, day);
                 datePicker.show();
