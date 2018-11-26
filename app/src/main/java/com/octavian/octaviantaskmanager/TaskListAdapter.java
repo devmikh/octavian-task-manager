@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,7 +47,7 @@ public class TaskListAdapter extends ArrayAdapter<TaskList> {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Delete list")
-                        .setMessage("All tasks associated with this list will be deleted\nAre you sure you want to proceed?")
+                        .setMessage("All tasks associated with this list will be deleted. Are you sure you want to proceed?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -104,17 +102,5 @@ public class TaskListAdapter extends ArrayAdapter<TaskList> {
             return LayoutInflater.from(mContext).inflate(R.layout.tasklist_list_item, parent, false);
         }
     }
-
-//    public View getViewByPosition(int pos, ListView listView) {
-//        final int firstListItemPosition = listView.getFirstVisiblePosition();
-//        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
-//
-//        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
-//            return listView.getAdapter().getView(pos, null, listView);
-//        } else {
-//            final int childIndex = pos - firstListItemPosition;
-//            return listView.getChildAt(childIndex);
-//        }
-//    }
 
 }

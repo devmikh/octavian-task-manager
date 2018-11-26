@@ -20,10 +20,11 @@
             android:id="@+id/empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No tasks found"
+            android:text="@string/no_tasks_found"
             android:layout_marginTop="10dp"
-            android:textSize="20dp"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:textColor="?attr/txtColorDone"/>
 
         <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"

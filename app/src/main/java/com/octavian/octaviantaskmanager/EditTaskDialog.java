@@ -4,12 +4,9 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -79,9 +76,7 @@ public class EditTaskDialog extends Dialog{
                 selectedPosition = i;
         }
 
-        spinnerAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, taskListTitles);
-
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter = new ArrayAdapter(getContext(), R.layout.spinner_item, taskListTitles);
         listsSpinner.setAdapter(spinnerAdapter);
         listsSpinner.setSelection(selectedPosition);
         dbHelper.closeDB();
@@ -89,6 +84,8 @@ public class EditTaskDialog extends Dialog{
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                errorTextTask.setVisibility(View.GONE);
+                errorTextDate.setVisibility(View.GONE);
                 String taskName = taskField.getText().toString().trim();
                 String date = dateField.getText().toString().trim();
                 String taskListTitle = listsSpinner.getSelectedItem().toString();
@@ -110,7 +107,7 @@ public class EditTaskDialog extends Dialog{
 
                     dbHelper.closeDB();
 
-                    Toast.makeText(activity, "Task added successfully",
+                    Toast.makeText(activity, "Task updated successfully",
                             Toast.LENGTH_LONG).show();
                     dismiss();
                 }

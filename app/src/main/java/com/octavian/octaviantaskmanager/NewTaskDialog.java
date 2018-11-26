@@ -68,7 +68,7 @@ public class NewTaskDialog extends Dialog{
         listsSpinner = findViewById(R.id.lists_spinner);
         dateField.setFocusable(false);
 
-        taskField.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
+        taskField.setFilters(new InputFilter[]{new InputFilter.LengthFilter(25)});
 
         dbHelper = new DBHelper(getContext());
         ArrayList<TaskList> taskLists = dbHelper.getAllTaskLists();
@@ -77,9 +77,7 @@ public class NewTaskDialog extends Dialog{
         for (TaskList taskList : taskLists){
             taskListTitles.add(taskList.getListTitle());
         }
-        spinnerAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, taskListTitles);
-
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter = new ArrayAdapter(getContext(), R.layout.spinner_item, taskListTitles);
         listsSpinner.setAdapter(spinnerAdapter);
         if (listName != null){
             for (int i=0; i < taskListTitles.size(); i++){
@@ -97,6 +95,8 @@ public class NewTaskDialog extends Dialog{
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                errorTextTask.setVisibility(View.GONE);
+                errorTextDate.setVisibility(View.GONE);
                 String taskName = taskField.getText().toString().trim();
                 String date = dateField.getText().toString().trim();
                 String taskListTitle = listsSpinner.getSelectedItem().toString();
@@ -115,7 +115,7 @@ public class NewTaskDialog extends Dialog{
 
                     getContext().getApplicationContext().sendBroadcast(updateIntent);
 
-                    Toast.makeText(activity, "Task added successfully with status " + task.getStatus(),
+                    Toast.makeText(activity, "Task added successfully",
                             Toast.LENGTH_LONG).show();
                     dismiss();
                 }

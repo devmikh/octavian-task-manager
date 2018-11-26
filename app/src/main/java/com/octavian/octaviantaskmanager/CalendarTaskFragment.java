@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -57,12 +54,8 @@ public class CalendarTaskFragment extends Fragment {
                 Task task = dbHelper.getTask(taskAdapter.getItem(position).getId());
                 if (task.getStatus() == 0){
                     task.setStatus(1);
-                    Toast.makeText(getActivity(), "status changed to 1",
-                            Toast.LENGTH_LONG).show();
                 }else{
                     task.setStatus(0);
-                    Toast.makeText(getActivity(), "status changed to 0",
-                            Toast.LENGTH_LONG).show();
                 }
                 dbHelper.updateTaskStatus(task);
 

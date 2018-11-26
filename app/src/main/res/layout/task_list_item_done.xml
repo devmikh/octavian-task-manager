@@ -27,23 +27,21 @@
         android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/check">
+        android:layout_toEndOf="@id/check">
 
         <TextView
             android:id="@+id/textView_taskTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="test task 1"
-            android:textColor="#000000"/>
+            android:textSize="20sp"
+            android:textColor="?attr/txtColorDone"/>
         <TextView
             android:layout_below="@+id/textView_taskTitle"
             android:id="@+id/textView_taskDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:text="10/10/2010"
-            android:textColor="#000000"/>
+            android:textSize="16sp"
+            android:textColor="?attr/txtColorDone"/>
 
     </RelativeLayout>
 
@@ -57,10 +55,10 @@
             android:id="@+id/deleteBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="7dp"
+            android:layout_marginEnd="20dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:drawableRight="@drawable/ic_close" />
+            android:drawableEnd="?attr/deleteIcon" />
     </RelativeLayout>
 
 

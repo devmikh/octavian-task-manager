@@ -10,13 +10,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
@@ -26,10 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
-import static android.support.constraint.Constraints.TAG;
 
 public class CalendarFragment extends Fragment {
 
@@ -67,10 +62,6 @@ public class CalendarFragment extends Fragment {
         refreshFragment();
 
 
-
-        // events has size 2 with the 2 events inserted previously
-        Log.e("CALENDAR", "Events: " + events);
-
         calendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
@@ -79,15 +70,13 @@ public class CalendarFragment extends Fragment {
                 currentDate = dateClicked;
                 getChildFragmentManager().beginTransaction().replace(R.id.calendar_task_container,
                         CalendarTaskFragment.newInstance(date)).commit();
-//                List<Event> events = calendarView.getEvents(dateClicked);
-//                Toast.makeText(getActivity(), "Task clicked with date " + dateClicked + ". Data: " + events,
-//                        Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
                 monthView.setText(dateFormatForMonth.format(calendarView.getFirstDayOfCurrentMonth()));
                 currentDate = calendarView.getFirstDayOfCurrentMonth();
+
             }
         });
 
@@ -121,9 +110,9 @@ public class CalendarFragment extends Fragment {
         Event event;
         for (int i = 0; i < tasks.size(); i++){
             if (tasks.get(i).getStatus() == 0){
-                event = new Event(Color.GREEN, convertToMs(tasks.get(i).getDate()), tasks.get(i).getTask());
+                event = new Event(Color.LTGRAY, convertToMs(tasks.get(i).getDate()), tasks.get(i).getTask());
             }else{
-                event = new Event(Color.YELLOW, convertToMs(tasks.get(i).getDate()), tasks.get(i).getTask());
+                event = new Event(Color.GREEN, convertToMs(tasks.get(i).getDate()), tasks.get(i).getTask());
             }
 
             events.add(event);

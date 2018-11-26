@@ -1,16 +1,12 @@
 package com.octavian.octaviantaskmanager;
 
-import android.app.ActionBar;
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +14,6 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -67,12 +62,6 @@ public class ListsFragment extends Fragment {
             dbHelper.createList(list);
             dbHelper.closeDB();
         }
-//        if (dbHelper.getTaskList("Default") != null){
-//            TaskList list = dbHelper.getTaskList("Default");
-//            dbHelper.deleteTaskList(list, true);
-//            dbHelper.closeDB();
-//        }
-
         refreshFragment();
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -91,48 +80,7 @@ public class ListsFragment extends Fragment {
                 tasksDialog.show();
                 Window window = tasksDialog.getWindow();
                 window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//                dbHelper = new DBHelper(getContext());
-//
-//                ArrayList<Task> tasks = dbHelper.getAllTasksByList(taskListAdapter.getItem(position).getListTitle());
 
-//                View child = listView.getChildAt(position);
-
-
-//                if (child.getVisibility() == View.VISIBLE){
-//                    child.setVisibility(View.GONE);
-//                }else{
-//                    child.setVisibility(View.VISIBLE);
-//                }
-//                getChildFragmentManager().beginTransaction().replace(child.findViewById(R.id.tasks_container).getId(),
-//                        TasksFragment.newInstance(taskListAdapter.getItem(position).getListTitle())).commit();
-//                Log.e("listView item onClick", "YES THAT WORKED" );
-
-//                String message = "";
-//
-//                for (Task task : tasks){
-//                    message += task.getTask() + ", ";
-//                }
-//
-//
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//                builder.setTitle("Show tasks")
-//                        .setMessage(message)
-//                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                            }
-//                        })
-//                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//
-//                            }
-//                        })
-//                        .setIcon(android.R.drawable.ic_dialog_alert)
-//                        .show();
-//                dbHelper.printData();
-//                dbHelper.closeDB();
 
             }
         });
@@ -142,40 +90,6 @@ public class ListsFragment extends Fragment {
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 EditListDialog dialog = new EditListDialog(getActivity(), taskListAdapter.getItem(position).getListTitle());
                 dialog.show();
-
-//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//                builder.setTitle("Delete task")
-//                        .setMessage("Are you sure you want to delete this task?")
-//                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//
-//                                dbHelper = new DBHelper(getContext());
-//
-//                                TaskList list_to_delete = taskListAdapter.getItem(position);
-//
-//                                dbHelper.deleteTaskList(list_to_delete, true);
-//
-//                                dbHelper.closeDB();
-//
-//                                Intent updateListsIntent = new Intent("db.updateTaskLists");
-//                                Intent updateTasksIntent = new Intent("db.updateTasks");
-//
-//                                getContext().getApplicationContext().sendBroadcast(updateListsIntent);
-//                                getContext().getApplicationContext().sendBroadcast(updateTasksIntent);
-//
-//                                Toast.makeText(getActivity(), "You successfully deleted the list",
-//                                        Toast.LENGTH_LONG).show();
-//                            }
-//                        })
-//                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//
-//                            }
-//                        })
-//                        .setIcon(android.R.drawable.ic_dialog_alert)
-//                        .show();
 
                 return true;
 

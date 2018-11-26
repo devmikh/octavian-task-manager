@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="OctavianAttrs">
+        <attr name="calendarColor" format="color"/>
+        <attr name="calendarCurrent" format="color"/>
+        <attr name="calendarSelected" format="color"/>
+        <attr name="bgColor" format="color"/>
+        <attr name="txtColor" format="color"/>
+        <attr name="txtColorDone" format="color"/>
+        <attr name="deleteIcon" format="reference" />
+    </declare-styleable>
+</resources>

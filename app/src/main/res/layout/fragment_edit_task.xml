@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/bgColor">
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:id="@+id/updateTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/update_task"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:textColor="?attr/txtColor"/>
 
     <EditText
+        android:layout_marginTop="16dp"
         android:id="@+id/taskField"
+        android:layout_below="@id/updateTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:hint="Task"/>
+        android:textColor="?attr/txtColor"
+        android:textColorHint="?attr/txtColorDone"
+        android:hint="@string/hint_task"/>
 
     <TextView
         android:id="@+id/errorTextTask"
@@ -19,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Please enter a task name"
+        android:text="@string/error_task_name"
         android:textColor="#ff0000"/>
 
     <EditText
@@ -30,7 +44,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:hint="Date"/>
+        android:textColor="?attr/txtColor"
+        android:textColorHint="?attr/txtColorDone"
+        android:hint="@string/hint_date"/>
 
     <TextView
         android:id="@+id/errorTextDate"
@@ -39,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Please choose a date"
+        android:text="@string/error_date"
         android:textColor="#ff0000"/>
 
     <Spinner
@@ -56,20 +72,21 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/lists_spinner"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
         <Button
             android:id="@+id/saveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="Save"/>
+            android:text="@string/button_save"/>
         <Button
             android:id="@+id/cancelBtn"
             android:layout_toEndOf="@id/saveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Cancel"/>
+            android:text="@string/button_cancel"/>
     </RelativeLayout>
 
 

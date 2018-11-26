@@ -15,15 +15,13 @@
             android:id="@+id/textView_listTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:layout_marginLeft="20dp"
+            android:textSize="20sp"
+            android:layout_marginStart="20dp"
             android:layout_centerVertical="true"
-
-            android:text="list"/>
+            android:textColor="?attr/txtColorDone"/>
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/task"
             android:layout_alignTop="@id/task"
             android:layout_alignBottom="@id/task">
             <TextView
@@ -32,9 +30,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="7dp"
+                android:layout_marginEnd="20dp"
                 android:layout_centerVertical="true"
-                android:drawableRight="@drawable/ic_close" />
+                android:drawableEnd="?attr/deleteIcon" />
         </RelativeLayout>
     </RelativeLayout>
 

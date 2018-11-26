@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.strictmode.SqliteObjectLeakedViolation;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -157,23 +156,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "." + KEY_LIST_ID + " AND " + TABLE_TASK + "." + KEY_ID
                 + " = " + TABLE_TASK_LIST + "." + KEY_TASK_ID;
 
-//        String query1 = "SELECT * FROM " + TABLE_TASK;
-//        String query2 = "SELECT * FROM " + TABLE_LIST;
-//        String query3 = "SELECT * FROM " + TABLE_TASK_LIST;
-
         Log.e(LOG, selectQuery);
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
 
-//        Cursor c1 = db.rawQuery(query1, null);
-//        Cursor c2 = db.rawQuery(query2, null);
-//        Cursor c3 = db.rawQuery(query3, null);
-
-//        Log.e(LOG, DatabaseUtils.dumpCursorToString(c));
-//        Log.e(LOG, DatabaseUtils.dumpCursorToString(c1));
-//        Log.e(LOG, DatabaseUtils.dumpCursorToString(c2));
-//        Log.e(LOG, DatabaseUtils.dumpCursorToString(c3));
         // looping through all rows and adding to list
         if (c.moveToFirst()){
             do {
@@ -380,9 +367,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[] {String.valueOf(list.getId())});
         db.delete(TABLE_TASK_LIST, KEY_LIST_ID + " = ?",
                 new String[] {String.valueOf(list.getId())});
-//        db.execSQL("DELETE FROM " + TABLE_TASK);
-//        db.execSQL("DELETE FROM " + TABLE_LIST);
-//        db.execSQL("DELETE FROM " + TABLE_TASK_LIST);
     }
 
     //assign a task to a task list
