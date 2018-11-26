@@ -29,23 +29,21 @@
         android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/check">
+        android:layout_toEndOf="@id/check">
 
         <TextView
             android:id="@+id/textView_taskTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="aaaaaaaaaaaaaaaaaaaaaaaaa"
-            android:textColor="#000000"/>
+            android:textSize="20sp"
+            android:textColor="?attr/txtColor"/>
         <TextView
             android:layout_below="@+id/textView_taskTitle"
             android:id="@+id/textView_taskDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:text="10/10/2010"
-            android:textColor="#000000"/>
+            android:textSize="16sp"
+            android:textColor="?attr/txtColor"/>
 
     </RelativeLayout>
 
@@ -60,62 +58,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="7dp"
+            android:layout_marginEnd="20dp"
             android:layout_centerVertical="true"
-            android:drawableRight="@drawable/ic_close" />
+            android:drawableEnd="?attr/deleteIcon" />
     </RelativeLayout>
-
-
-
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/button"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<Button-->
-            <!--android:id="@+id/deleteBtn"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="X"/>-->
-        <!---->
-    <!--</RelativeLayout>-->
-
-    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--xmlns:tools="http://schemas.android.com/tools"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentStart="true"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:drawableLeft="@drawable/ic_check_circle" />-->
-
-        <!--<LinearLayout-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content">-->
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:gravity="center"-->
-                <!--android:text="Item" />-->
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="10/10/2010"/>-->
-        <!--</LinearLayout>-->
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:drawableRight="@drawable/ic_close"-->
-            <!--android:gravity="right"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_marginRight="10dp"/>-->
-
-    <!--</LinearLayout>-->
-
 
 </RelativeLayout>

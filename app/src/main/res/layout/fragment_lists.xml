@@ -5,19 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".ListsFragment">
 
-
-
-
     <ListView
         android:id="@+id/lists_list_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
     
     <TextView
         android:id="@+id/empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No lists found"
+        android:text="@string/no_lists_found"
         android:layout_centerHorizontal="true"/>
 
     <android.support.design.widget.CoordinatorLayout

@@ -39,6 +39,8 @@ public class NewListDialog extends Dialog {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                errorText.setVisibility(View.GONE);
+                errorText2.setVisibility(View.GONE);
                 dbHelper = new DBHelper(getContext());
                 String listName = listField.getText().toString().trim();
                 if (listName.equals("")){

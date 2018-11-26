@@ -3,4 +3,25 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_tasks_found">No tasks found</string>
+    <string name="no_tasks_for_date">No tasks for this date</string>
+    <string name="update_list_name">Update List Name</string>
+    <string name="hint_list">List</string>
+    <string name="error_list_name">Please enter a list name</string>
+    <string name="error_list_exists">List with this name already exists</string>
+    <string name="button_save">Save</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="update_task">Update task</string>
+    <string name="hint_task">Task</string>
+    <string name="hint_date">Date</string>
+    <string name="error_date">Please choose a date</string>
+    <string name="no_lists_found">No lists found</string>
+    <string name="new_list">New List</string>
+    <string name="button_create_list">Create List</string>
+    <string name="new_task">New Task</string>
+    <string name="error_task_name">Please enter a task name</string>
+    <string name="button_add_task">Add Task</string>
+    <string name="toggle_theme">Toggle Theme</string>
+    <string name="toggle_theme_desc">(Application will be restarted)</string>
+    <string name="empty_list">This list is empty</string>
 </resources>

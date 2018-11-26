@@ -6,6 +6,27 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="calendarColor">#016356</item>
+        <item name="calendarCurrent">#E0608F</item>
+        <item name="calendarSelected">#E03D78</item>
+        <item name="bgColor">#ffffff</item>
+        <item name="txtColor">#2B2729</item>
+        <item name="txtColorDone">#676767</item>
+        <item name="deleteIcon">@drawable/ic_close</item>
+    </style>
+
+    <style name="AppThemeDark">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#35494F</item>
+        <item name="colorPrimaryDark">#2B3A40</item>
+        <item name="colorAccent">#32A9D1</item>
+        <item name="calendarColor">#202C30</item>
+        <item name="calendarCurrent">#6DA9C2</item>
+        <item name="calendarSelected">#32A9D1</item>
+        <item name="bgColor">#3A5D69</item>
+        <item name="txtColor">#F0EDEE</item>
+        <item name="txtColorDone">#BAB8B9</item>
+        <item name="deleteIcon">@drawable/ic_close_dark</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.DarkActionBar">

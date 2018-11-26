@@ -13,10 +13,8 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TasksDialog extends Dialog {
 
@@ -61,12 +59,8 @@ public class TasksDialog extends Dialog {
                 Task task = dbHelper.getTask(taskAdapter.getItem(position).getId());
                 if (task.getStatus() == 0){
                     task.setStatus(1);
-                    Toast.makeText(activity, "status changed to 1",
-                            Toast.LENGTH_LONG).show();
                 }else{
                     task.setStatus(0);
-                    Toast.makeText(activity, "status changed to 0",
-                            Toast.LENGTH_LONG).show();
                 }
                 dbHelper.updateTaskStatus(task);
 

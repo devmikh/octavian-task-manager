@@ -2,16 +2,11 @@ package com.octavian.octaviantaskmanager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.SimpleAdapter;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,14 +38,6 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         title.setText(currentTask.getTask());
 
 
-
-//        if (currentTask.getStatus() == 0){
-//            title.setPaintFlags(title.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
-//        }else{
-//            title.setPaintFlags(title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-//        }
-
-
         TextView date = listItem.findViewById(R.id.textView_taskDate);
         date.setText(currentTask.getDate());
 
@@ -64,16 +51,15 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
                 dbHelper.closeDB();
 
+                Toast.makeText(getContext(), "Task deleted successfully",
+                        Toast.LENGTH_LONG).show();
+
                 Intent updateIntent = new Intent("db.updateTasks");
 
                 getContext().getApplicationContext().sendBroadcast(updateIntent);
 
-//                Toast.makeText(getActivity(), "You successfully deleted the task",
-//                        Toast.LENGTH_LONG).show();
             }
         });
-
-
 
         return listItem;
 

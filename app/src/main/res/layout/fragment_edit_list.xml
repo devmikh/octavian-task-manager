@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/bgColor">
+
+    <TextView
+        android:layout_marginTop="16dp"
+        android:id="@+id/editList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/update_list_name"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:textColor="?attr/txtColor"/>
 
     <EditText
+        android:layout_below="@id/editList"
+        android:layout_marginTop="16dp"
         android:id="@+id/listField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:hint="List"/>
+        android:textColor="?attr/txtColor"
+        android:textColorHint="?attr/txtColorDone"
+        android:hint="@string/hint_list"/>
 
     <TextView
         android:id="@+id/errorText"
@@ -19,31 +33,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Please enter a list name"
+        android:text="@string/error_list_name"
+        android:textColor="#ff0000"/>
+
+    <TextView
+        android:id="@+id/errorText2"
+        android:visibility="gone"
+        android:layout_below="@id/errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/error_list_exists"
         android:textColor="#ff0000"/>
 
     <RelativeLayout
         android:id="@+id/btnLayout"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/errorText"
+        android:layout_below="@id/errorText2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
         <Button
             android:id="@+id/saveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="Save"/>
+            android:text="@string/button_save"/>
         <Button
             android:id="@+id/cancelBtn"
             android:layout_toEndOf="@id/saveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Cancel"/>
+            android:text="@string/button_cancel"/>
     </RelativeLayout>
-
 
 
 </RelativeLayout>
