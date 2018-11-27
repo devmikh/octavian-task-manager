@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="?attr/bgColor">
     <Switch
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/toggle_theme"
@@ -22,5 +22,15 @@
         android:layout_height="wrap_content"
         android:text="@string/toggle_theme_desc"
         android:layout_alignStart="@id/switch_theme"/>
+    <TextView
+        android:id="@+id/about"
+        android:textColor="?attr/txtColor"
+        android:layout_marginStart="20dp"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/switch_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about"/>
 
 </RelativeLayout>

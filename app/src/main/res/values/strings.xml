@@ -24,4 +24,5 @@
     <string name="toggle_theme">Toggle Theme</string>
     <string name="toggle_theme_desc">(Application will be restarted)</string>
     <string name="empty_list">This list is empty</string>
+    <string name="about">About</string>
 </resources>
